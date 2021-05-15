@@ -82,8 +82,8 @@ public class AssistantJack {
         ArrayList<Integer> wrongItems = new ArrayList<Integer>();
 
         this.timesAsked++;
-
-        // check each part and add to array list appropriately
+        //System.out.println(weapon + " " + location + " " + person);
+        //check each part and add to array list appropriately
         if (this.correctTheory.getWeapon() != weapon) {
             wrongItems.add(1);
         }

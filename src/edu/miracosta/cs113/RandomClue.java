@@ -16,6 +16,7 @@ package edu.miracosta.cs113;
  */
 
 import java.util.Random;
+import java.util.ArrayList;
 import java.util.Scanner;
 import model.Theory;
 import model.AssistantJack;
@@ -55,6 +56,9 @@ public class RandomClue {
         AssistantJack jack;
         Scanner keyboard = new Scanner(System.in);
         Random random = new Random();
+        ArrayList <Integer> weaponArray = new ArrayList<Integer>();
+        ArrayList <Integer> locationArray = new ArrayList<Integer>();
+        ArrayList <Integer> murderArray = new ArrayList<Integer>();
 
         // INPUT
         System.out.print("Which theory would like you like to test? (1, 2, 3[random]): ");
@@ -64,18 +68,50 @@ public class RandomClue {
         // PROCESSING
         jack = new AssistantJack(answerSet);
 
+//        do {
+//            weapon = random.nextInt(6) + 1;
+//            location = random.nextInt(10) + 1;
+//            murder = random.nextInt(6) + 1;
+//            solution = jack.checkAnswer(weapon, location, murder);
+//        } while (solution != 0);
+
+//        answer = new Theory(weapon, location, murder);
+        weapon  = random.nextInt(6) + 1;
+    	location = random.nextInt(10) + 1;
+    	murder = random.nextInt(6) + 1;
         do {
-            weapon = random.nextInt(6) + 1;
-            location = random.nextInt(10) + 1;
-            murder = random.nextInt(6) + 1;
-            solution = jack.checkAnswer(weapon, location, murder);
-        } while (solution != 0);
+//        	weapon  = random.nextInt(6) + 1;
+//        	location = random.nextInt(10) + 1;
+//        	murder = random.nextInt(6) + 1;
+        	solution = jack.checkAnswer(weapon, location, murder);
+        	System.out.println(solution);
+        	System.out.println(weapon + " " + location + " " + murder);
 
+        	if(solution == 1) {
+        		weaponArray.add(weapon);
+        		weapon = random.nextInt(6) + 1;
+        		while(weaponArray.contains(weapon)) {
+        			weapon = random.nextInt(6) + 1;
+        		}
+        	}
+        	if(solution == 2) {
+        		locationArray.add(location);
+        		location = random.nextInt(10) + 1;
+        		while(weaponArray.contains(location)) {
+        			location = random.nextInt(10) + 1;
+        		}
+        	}
+        	if(solution == 3) {
+        		murderArray.add(murder);
+        		murder = random.nextInt(6) + 1;
+        		while(murderArray.contains(murder)) {
+        			murder = random.nextInt(6) + 1;
+        		}
+        	}
+        }while (solution != 0);
         answer = new Theory(weapon, location, murder);
-
         // OUTPUT
         System.out.println("Total Checks = " + jack.getTimesAsked() + ", Solution " + answer);
-
         if (jack.getTimesAsked() > 20) {
             System.out.println("FAILED!! You're a horrible Detective...");
         } else {
